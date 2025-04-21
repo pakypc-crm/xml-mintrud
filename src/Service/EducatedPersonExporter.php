@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\DTO\StudentExportData;
-use App\Factory\XmlDocumentFactory;
 use App\Model\Group;
 use App\Service\DataCollector\StudentDataCollector;
 use App\Service\Validator\XmlValidator;
+use App\Serialization\XmlSerializerRegistry;
+use App\XMLDocument;
 
 /**
  * Сервис экспорта данных об обученных лицах.
@@ -19,15 +20,15 @@ final class EducatedPersonExporter
 {
     /**
      * @param StudentDataCollector $studentDataCollector Сборщик данных студентов
-     * @param XmlDocumentFactory $xmlFactory Фабрика для создания XML-документов
      * @param XmlValidator $xmlValidator Валидатор XML-документов
      * @param Group $groupRepository Репозиторий для доступа к данным групп
+     * @param XmlSerializerRegistry $serializerRegistry Реестр сериализаторов XML
      */
     public function __construct(
         private readonly StudentDataCollector $studentDataCollector,
-        private readonly XmlDocumentFactory $xmlFactory,
         private readonly XmlValidator $xmlValidator,
         private readonly Group $groupRepository,
+        private readonly XmlSerializerRegistry $serializerRegistry,
     ) {
     }
 
@@ -135,13 +136,22 @@ final class EducatedPersonExporter
      */
     private function createAndValidateXml(array $studentsData): string
     {
-        // Создаем XML-документ
-        $document = $this->xmlFactory->createFullDocument($studentsData);
-        
-        // Валидируем документ
-        $this->xmlValidator->validate($document);
-        
-        // Преобразуем документ в строку
-        return $document->saveXML();
+        try {
+            // Создаем документ для реестра
+            $document = XMLDocument::createRegistry($this->serializerRegistry);
+            
+            // Добавляем каждого студента
+            foreach ($studentsData as $studentData) {
+                $document->addStudent($studentData);
+            }
+            
+            // Валидируем документ
+            $this->xmlValidator->validate($document->getDOMDocument());
+            
+            // Возвращаем XML в виде строки
+            return $document->saveXML();
+        } catch (\Exception $e) {
+            throw new \RuntimeException('Ошибка при создании или валидации XML: ' . $e->getMessage(), 0, $e);
+        }
     }
 }
