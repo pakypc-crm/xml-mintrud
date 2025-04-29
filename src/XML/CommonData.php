@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace crm\resurces\XML;
+namespace App\XML;
 
 /**
  * DTO для хранения общих данных экспорта

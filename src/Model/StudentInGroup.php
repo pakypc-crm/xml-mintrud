@@ -3,7 +3,7 @@
  * @author roxblnfk roxblnfk@ya.ru
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace crm\resurces\models;
+namespace App\Model;
 
 use ANKETS;
 use APP;

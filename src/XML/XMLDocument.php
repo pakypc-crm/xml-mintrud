@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace crm\resurces\XML;
+namespace App\XML;
 
-use crm\resurces\models\CustomStudent;
-use crm\resurces\models\CustomStudProf;
-use crm\resurces\models\EduGroup;
-use crm\resurces\models\EduProgram;
-use crm\resurces\models\Organization;
-use crm\resurces\models\StudentInGroup;
+use App\Model\CustomStudent;
+use App\Model\CustomStudProf;
+use App\Model\EduGroup;
+use App\Model\EduProgram;
+use App\Model\Organization;
+use App\Model\StudentInGroup;
 use DOMDocument;
 use Stringable;
 

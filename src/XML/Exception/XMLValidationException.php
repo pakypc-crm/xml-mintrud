@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace crm\resurces\XML\Exception;
+namespace App\XML\Exception;
 
 /**
  * Исключение, возникающее при ошибке валидации XML

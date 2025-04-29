@@ -4,7 +4,7 @@
  * @date   2020.5.21
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace crm\resurces\models;
+namespace App\Model;
 
 use crm\models\baseRecord;
 use crm\models\baseRecord\Exception;

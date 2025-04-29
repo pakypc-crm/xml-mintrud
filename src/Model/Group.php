@@ -28,7 +28,7 @@ final class Group
         public readonly string $educationProgram,
         public readonly int $programId,
         public readonly string $profession,
-        public readonly $examDate,
+        public readonly string|\DateTimeImmutable $examDate,
         public readonly string $protocolNumber,
         public readonly string $organizationId,
         public readonly ?string $workplace = null,
