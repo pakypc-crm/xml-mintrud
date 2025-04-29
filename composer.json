@@ -1,0 +1,21 @@
+{
+    "name": "pakypc/xml-mintrud",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^12.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pakypc\\XMLMintrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kaelforn",
+            "email": "kaelforn@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {}
+}

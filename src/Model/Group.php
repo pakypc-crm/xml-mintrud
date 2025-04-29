@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace Pakypc\XMLMintrud\Model;
 
 /**
  * Модель данных группы студентов.

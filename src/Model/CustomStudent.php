@@ -3,7 +3,7 @@
  * @author roxblnfk roxblnfk@ya.ru
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace App\Model;
+namespace Pakypc\XMLMintrud\Model;
 
 use APP;
 use crm\models\baseRecord\Exception;

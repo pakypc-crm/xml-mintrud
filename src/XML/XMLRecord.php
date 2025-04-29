@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\XML;
+namespace Pakypc\XMLMintrud\XML;
 
-use App\Model\CustomStudent;
-use App\Model\CustomStudProf;
-use App\Model\EduGroup;
-use App\Model\EduProgram;
-use App\Model\Organization;
-use App\Model\StudentInGroup;
+use Pakypc\XMLMintrud\Model\CustomStudent;
+use Pakypc\XMLMintrud\Model\CustomStudProf;
+use Pakypc\XMLMintrud\Model\EduGroup;
+use Pakypc\XMLMintrud\Model\EduProgram;
+use Pakypc\XMLMintrud\Model\Organization;
+use Pakypc\XMLMintrud\Model\StudentInGroup;
 use DateTimeImmutable;
 
 /**

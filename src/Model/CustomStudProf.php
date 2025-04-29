@@ -4,7 +4,7 @@
  * @date   2020.5.21
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace App\Model;
+namespace Pakypc\XMLMintrud\Model;
 
 use crm\models\baseRecord;
 use crm\models\baseRecord\Exception;

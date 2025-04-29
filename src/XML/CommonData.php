@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\XML;
+namespace Pakypc\XMLMintrud\XML;
 
 /**
  * DTO для хранения общих данных экспорта
