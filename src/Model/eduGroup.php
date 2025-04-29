@@ -5,16 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use crm\models\baseRecord;
-use crm\models\baseRecord\Exception;
-use crm\models\baseRecord\statsTrait;
-use crm\models\dbColumn;
-use crm\models\eduBook;
-use crm\models\eduDirection;
-use crm\models\mrPrepod;
-use crm\models\queryOptions;
-use crm\models\studentInGroupProgEx;
-use DB;
+
 
 /**
  * Class eduGroup

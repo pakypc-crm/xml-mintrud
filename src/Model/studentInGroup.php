@@ -5,23 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use ANKETS;
-use APP;
-use CONF;
-use crm\models\baseRecord\Exception;
-use crm\models\baseRecord\statsTrait;
-use crm\models\dbColumn;
-use crm\models\eduBook;
-use crm\models\eduCourse;
-use crm\models\eduDirection;
-use crm\models\mailTemplate;
-use crm\models\queryOptions;
-use crm\models\smsCallStack;
-use crm\models\studentInGroupProgEx;
-use DB;
-use TBS;
-use function crm\models\dec2hz;
-use function crm\models\num2str;
+
 
 /**
  * Общие поля в базовом классе @see baseStudentIn

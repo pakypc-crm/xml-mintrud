@@ -6,9 +6,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use crm\models\baseRecord;
-use crm\models\baseRecord\Exception;
-use crm\models\queryOptions;
+
 
 /**
  * Класс для хранения информации о профессии студента

@@ -5,16 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use APP;
-use crm\models\baseRecord;
-use crm\models\baseRecord\Exception;
-use crm\models\dbColumn;
-use crm\models\landingStudent;
-use crm\models\organizationHistName;
-use crm\models\queryOptions;
-use DB;
-use FORMAT;
-use USER;
+
 
 /**
  * Class organization

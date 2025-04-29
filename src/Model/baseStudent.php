@@ -5,10 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use crm\models\baseRecord;
-use crm\models\baseRecord\Exception;
-use crm\models\dbColumn;
-use DB;
+
 
 /**
  * Class baseStudent

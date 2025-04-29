@@ -5,13 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use crm\models\baseRecord;
-use crm\models\eduCourse;
-use crm\models\eduDirection;
-use crm\models\eduDistance;
-use crm\models\eduTest;
-use crm\models\queryOptions;
-use DB;
+
 
 /**
  * Базовый класс для студентов

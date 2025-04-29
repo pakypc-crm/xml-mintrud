@@ -5,22 +5,7 @@
  */
 namespace Pakypc\XMLMintrud\Model;
 
-use APP;
-use crm\models\baseRecord\Exception;
-use crm\models\cookieSession;
-use crm\models\dbColumn;
-use crm\models\eduBook;
-use crm\models\eduDirection;
-use crm\models\landingStudent;
-use crm\models\mailTemplate;
-use crm\models\queryOptions;
-use crm\models\smsCallStack;
-use crm\models\studPhoto;
-use DB;
-use FORMAT;
-use STUDS;
-use URLify;
-use function crm\models\dec2hz;
+
 
 /**
  * Class customStudent
