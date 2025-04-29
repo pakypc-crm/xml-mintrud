@@ -118,7 +118,7 @@ final class XMLDocument implements Stringable
      */
     public function validate(?string $schemaPath = null): bool
     {
-        $schemaPath = $schemaPath ?? __DIR__ . '/../../resurces/educated_person_import_v1.0.8.xsd';
+        $schemaPath = $schemaPath ?? __DIR__ . '/../../resources/educated_person_import_v1.0.8.xsd';
         
         $dom = new DOMDocument();
         $dom->loadXML($this->__toString());
