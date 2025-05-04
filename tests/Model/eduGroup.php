@@ -3,7 +3,7 @@
  * @author roxblnfk roxblnfk@ya.ru
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace Pakypc\XMLMintrud\Model;
+namespace crm\models;
 
 
 

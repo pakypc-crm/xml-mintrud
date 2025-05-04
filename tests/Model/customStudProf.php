@@ -4,7 +4,7 @@
  * @date   2020.5.21
  * @link   https://gitlab.com/roxblnfk/crm
  */
-namespace Pakypc\XMLMintrud\Model;
+namespace crm\models;
 
 
 

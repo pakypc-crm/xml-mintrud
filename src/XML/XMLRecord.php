@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XML;
 
-use Pakypc\XMLMintrud\Model\CustomStudent;
-use Pakypc\XMLMintrud\Model\CustomStudProf;
-use Pakypc\XMLMintrud\Model\EduGroup;
-use Pakypc\XMLMintrud\Model\EduProgram;
-use Pakypc\XMLMintrud\Model\Organization;
-use Pakypc\XMLMintrud\Model\StudentInGroup;
+use crm\models\CustomStudent;
+use crm\models\CustomStudProf;
+use crm\models\EduGroup;
+use crm\models\EduProgram;
+use crm\models\Organization;
+use crm\models\StudentInGroup;
 use DateTimeImmutable;
 
 /**
@@ -66,11 +66,11 @@ final class XMLRecord
      * Создает экземпляр XMLRecord на основе данных из CRM
      *
      * @param CustomStudent $student Данные студента
-     * @param StudentInGroup $studentInGroup Данные студента в группе
-     * @param CustomStudProf $position Данные о должности студента
-     * @param EduGroup $group Данные о группе обучения
+     * @param \crm\models\StudentInGroup $studentInGroup Данные студента в группе
+     * @param \crm\models\CustomStudProf $position Данные о должности студента
+     * @param \crm\models\EduGroup $group Данные о группе обучения
      * @param EduProgram $program Данные о программе обучения
-     * @param Organization $organization Данные об организации
+     * @param \crm\models\Organization $organization Данные об организации
      * @param CommonData $commonData Общие данные
      * @return self Экземпляр XMLRecord
      */
