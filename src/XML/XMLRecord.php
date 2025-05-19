@@ -11,6 +11,15 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use DateTimeImmutable;
+use Pakypc\XMLMintrud\ValueObject\Snils;
+use Pakypc\XMLMintrud\ValueObject\Name;
+use Pakypc\XMLMintrud\ValueObject\Title;
+use Pakypc\XMLMintrud\ValueObject\Inn;
+use Pakypc\XMLMintrud\ValueObject\Position;
+use Pakypc\XMLMintrud\ValueObject\LearnProgramId;
+use Pakypc\XMLMintrud\ValueObject\ProtocolNumber;
+use Pakypc\XMLMintrud\ValueObject\Citizenship;
+use Pakypc\XMLMintrud\ValueObject\OuterId;
 
 /**
  * DTO для хранения данных о записи учащегося
@@ -18,47 +27,48 @@ use DateTimeImmutable;
  * Содержит все необходимые данные для формирования одной записи в XML-документе
  * в соответствии с XSD-схемой.
  */
+
 final class XMLRecord
 {
     /**
-     * @param string $lastName Фамилия работника
-     * @param string $firstName Имя работника
-     * @param string $middleName Отчество работника
-     * @param string|null $snils СНИЛС работника
+     * @param Name $lastName Фамилия работника
+     * @param Name $firstName Имя работника
+     * @param Name $middleName Отчество работника
+     * @param Snils $snils СНИЛС работника
      * @param bool|null $isForeignSnils Признак иностранного СНИЛС
-     * @param string|null $foreignSnils Иностранный СНИЛС
-     * @param string|null $citizenship Гражданство
-     * @param string $position Должность
-     * @param string $employerInn ИНН работодателя
-     * @param string $employerTitle Название работодателя
-     * @param string $organizationInn ИНН организации обучения
-     * @param string $organizationTitle Название организации обучения
+     * @param Snils $foreignSnils Иностранный СНИЛС
+     * @param Citizenship $citizenship Гражданство
+     * @param Position $position Должность
+     * @param Inn $employerInn ИНН работодателя
+     * @param Title $employerTitle Название работодателя
+     * @param Inn $organizationInn ИНН организации обучения
+     * @param Title $organizationTitle Название организации обучения
      * @param DateTimeImmutable $testDate Дата экзамена
-     * @param string $protocolNumber Номер протокола
-     * @param string $learnProgramTitle Название программы обучения
+     * @param ProtocolNumber $protocolNumber Номер протокола
+     * @param Title $learnProgramTitle Название программы обучения
      * @param bool $isPassed Признак успешной сдачи экзамена
-     * @param int $learnProgramId ID программы обучения по схеме
-     * @param string|null $outerId Внешний идентификатор записи
+     * @param LearnProgramId $learnProgramId ID программы обучения по схеме
+     * @param OuterId $outerId Внешний идентификатор записи
      */
     private function __construct(
-        private readonly string $lastName,
-        private readonly string $firstName,
-        private readonly string $middleName,
-        private readonly ?string $snils,
+        private readonly Name $lastName,
+        private readonly Name $firstName,
+        private readonly Name $middleName,
+        private readonly Snils $snils,
         private readonly ?bool $isForeignSnils,
-        private readonly ?string $foreignSnils,
-        private readonly ?string $citizenship,
-        private readonly string $position,
-        private readonly string $employerInn,
-        private readonly string $employerTitle,
-        private readonly string $organizationInn,
-        private readonly string $organizationTitle,
+        private readonly Snils $foreignSnils,
+        private readonly Citizenship $citizenship,
+        private readonly Position $position,
+        private readonly Inn $employerInn,
+        private readonly Title $employerTitle,
+        private readonly Inn $organizationInn,
+        private readonly Title $organizationTitle,
         private readonly DateTimeImmutable $testDate,
-        private readonly string $protocolNumber,
-        private readonly string $learnProgramTitle,
+        private readonly ProtocolNumber $protocolNumber,
+        private readonly Title $learnProgramTitle,
         private readonly bool $isPassed,
-        private readonly int $learnProgramId,
-        private readonly ?string $outerId,
+        private readonly LearnProgramId $learnProgramId,
+        private readonly OuterId $outerId,
     ) {
     }
 
@@ -84,15 +94,15 @@ final class XMLRecord
         CommonData $commonData
     ): self {
         // Получаем дату экзамена
-        $testDate = !empty($studentInGroup->examendate) 
-            ? new DateTimeImmutable($studentInGroup->examendate) 
-            : (!empty($group->examen) 
-                ? new DateTimeImmutable($group->examen) 
+        $testDate = !empty($studentInGroup->examendate)
+            ? new DateTimeImmutable($studentInGroup->examendate)
+            : (!empty($group->examen)
+                ? new DateTimeImmutable($group->examen)
                 : new DateTimeImmutable());
 
         // Получаем номер протокола (используем номер сертификата, если есть)
-        $protocolNumber = !empty($studentInGroup->certNumber) 
-            ? $studentInGroup->certNumber 
+        $protocolNumber = !empty($studentInGroup->certNumber)
+            ? $studentInGroup->certNumber
             : ('PROT-' . $group->id . '-' . $student->id);
 
         return new self(
@@ -113,7 +123,7 @@ final class XMLRecord
             $program->name, // Название программы обучения
             $studentInGroup->examenated, // Признак успешной сдачи экзамена
             $commonData->getProgramIdByLocal($program->id), // ID программы обучения по схеме
-            (string)$student->id, // Внешний идентификатор записи
+            (string) $student->id, // Внешний идентификатор записи
         );
     }
 
@@ -127,85 +137,85 @@ final class XMLRecord
     {
         // Создаем элемент RegistryRecord
         $recordElement = $document->createElement('RegistryRecord');
-        
+
         // Добавляем атрибут outerId, если он задан
         if ($this->outerId !== null) {
-            $recordElement->setAttribute('outerId', $this->outerId);
+            $recordElement->setAttribute('outerId', (string) $this->outerId);
         }
-        
+
         // Создаем элемент Worker
         $workerElement = $document->createElement('Worker');
-        
+
         // Добавляем элементы ФИО
-        $workerElement->appendChild($document->createElement('LastName', $this->lastName));
-        $workerElement->appendChild($document->createElement('FirstName', $this->firstName));
-        $workerElement->appendChild($document->createElement('MiddleName', $this->middleName));
-        
+        $workerElement->appendChild($document->createElement('LastName', (string) $this->lastName));
+        $workerElement->appendChild($document->createElement('FirstName', (string) $this->firstName));
+        $workerElement->appendChild($document->createElement('MiddleName', (string) $this->middleName));
+
         // Добавляем СНИЛС, если он задан
         if ($this->snils !== null) {
-            $workerElement->appendChild($document->createElement('Snils', $this->snils));
+            $workerElement->appendChild($document->createElement('Snils', (string) $this->snils));
         }
-        
+
         // Добавляем IsForeignSnils, если он задан
         if ($this->isForeignSnils !== null) {
             $workerElement->appendChild($document->createElement('IsForeignSnils', $this->isForeignSnils ? '1' : '0'));
         }
-        
+
         // Добавляем ForeignSnils, если он задан
         if ($this->foreignSnils !== null) {
-            $workerElement->appendChild($document->createElement('ForeignSnils', $this->foreignSnils));
+            $workerElement->appendChild($document->createElement('ForeignSnils', (string) $this->foreignSnils));
         }
-        
+
         // Добавляем Citizenship, если оно задано
         if ($this->citizenship !== null) {
-            $workerElement->appendChild($document->createElement('Citizenship', $this->citizenship));
+            $workerElement->appendChild($document->createElement('Citizenship', (string) $this->citizenship));
         }
-        
+
         // Добавляем Position
-        $workerElement->appendChild($document->createElement('Position', $this->position));
-        
+        $workerElement->appendChild($document->createElement('Position', (string) $this->position));
+
         // Добавляем EmployerInn
-        $workerElement->appendChild($document->createElement('EmployerInn', $this->employerInn));
-        
+        $workerElement->appendChild($document->createElement('EmployerInn', (string) $this->employerInn));
+
         // Добавляем EmployerTitle
-        $workerElement->appendChild($document->createElement('EmployerTitle', $this->employerTitle));
-        
+        $workerElement->appendChild($document->createElement('EmployerTitle', (string) $this->employerTitle));
+
         // Добавляем Worker в RegistryRecord
         $recordElement->appendChild($workerElement);
-        
+
         // Создаем элемент Organization
         $organizationElement = $document->createElement('Organization');
-        
+
         // Добавляем Inn
-        $organizationElement->appendChild($document->createElement('Inn', $this->organizationInn));
-        
+        $organizationElement->appendChild($document->createElement('Inn', (string) $this->organizationInn));
+
         // Добавляем Title
-        $organizationElement->appendChild($document->createElement('Title', $this->organizationTitle));
-        
+        $organizationElement->appendChild($document->createElement('Title', (string) $this->organizationTitle));
+
         // Добавляем Organization в RegistryRecord
         $recordElement->appendChild($organizationElement);
-        
+
         // Создаем элемент Test
         $testElement = $document->createElement('Test');
-        
+
         // Добавляем атрибут isPassed
         $testElement->setAttribute('isPassed', $this->isPassed ? '1' : '0');
-        
+
         // Добавляем атрибут learnProgramId
-        $testElement->setAttribute('learnProgramId', (string)$this->learnProgramId);
-        
+        $testElement->setAttribute('learnProgramId', (string) $this->learnProgramId);
+
         // Добавляем Date
         $testElement->appendChild($document->createElement('Date', $this->testDate->format('Y-m-d')));
-        
+
         // Добавляем ProtocolNumber
-        $testElement->appendChild($document->createElement('ProtocolNumber', $this->protocolNumber));
-        
+        $testElement->appendChild($document->createElement('ProtocolNumber', (string) $this->protocolNumber));
+
         // Добавляем LearnProgramTitle
-        $testElement->appendChild($document->createElement('LearnProgramTitle', $this->learnProgramTitle));
-        
+        $testElement->appendChild($document->createElement('LearnProgramTitle', (string) $this->learnProgramTitle));
+
         // Добавляем Test в RegistryRecord
         $recordElement->appendChild($testElement);
-        
+
         return $recordElement;
     }
 }
