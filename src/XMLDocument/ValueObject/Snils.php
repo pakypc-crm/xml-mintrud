@@ -12,7 +12,8 @@ class Snils implements \Stringable
         $num = preg_replace('/\\D/ui', '', (string) $value);
 
         # Приводим к формату XXX-XXX-XXX XX
-        $this->value = sprintf('%s-%s-%s %s', substr($num, 0, 3), substr($num, 3, 3), substr($num, 6, 3), substr($num, 9));
+        $num = sprintf('%s-%s-%s %s', substr($num, 0, 3), substr($num, 3, 3), substr($num, 6, 3), substr($num, 9));
+        $this->value = trim($num, ' -');
     }
 
     public function __toString(): string
