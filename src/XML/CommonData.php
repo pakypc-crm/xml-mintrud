@@ -15,12 +15,10 @@ final class CommonData
     /**
      * @param string $organizationInn ИНН организации обучения
      * @param string $organizationTitle Название организации обучения
-     * @param array<int, int> $programMapping Маппинг ID программы обучения в learnProgramId схемы
      */
     public function __construct(
         private readonly string $organizationInn,
         private readonly string $organizationTitle,
-        private readonly array $programMapping = [],
     ) {
     }
 
@@ -38,16 +36,5 @@ final class CommonData
     public function getOrganizationTitle(): string
     {
         return $this->organizationTitle;
-    }
-
-    /**
-     * Возвращает ID программы из схемы по ID программы из CRM
-     *
-     * @param int $programId ID программы из CRM
-     * @return int ID программы из схемы
-     */
-    public function getProgramIdByLocal(int $programId): int
-    {
-        return $this->programMapping[$programId] ?? 1; // По умолчанию возвращаем 1, если маппинг не задан
     }
 }

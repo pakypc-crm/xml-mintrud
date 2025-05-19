@@ -122,7 +122,7 @@ final class XMLRecord
             $protocolNumber, // Номер протокола
             $program->name, // Название программы обучения
             $studentInGroup->examenated, // Признак успешной сдачи экзамена
-            $commonData->getProgramIdByLocal($program->id), // ID программы обучения по схеме
+            $program->id, // ID программы обучения по схеме
             (string) $student->id, // Внешний идентификатор записи
         );
     }
