@@ -1,13 +1,14 @@
 <?php
 
-namespace Pakypc\XMLMintrud\ValueObject;
+namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Citizenship implements \Stringable
+class Name implements \Stringable
 {
     private readonly string $value;
 
     public function __construct (string $value)
     {
+        #Убираем пробелы в начале и в конце
         $this->value = trim($value);
     }
 

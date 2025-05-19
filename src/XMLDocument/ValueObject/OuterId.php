@@ -1,14 +1,14 @@
 <?php
 
-namespace Pakypc\XMLMintrud\ValueObject;
+namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class LearnProgramId implements \Stringable
+class OuterId implements \Stringable
 {
     private readonly string $value;
 
     public function __construct (string|int $value)
     {
-        $this->value = preg_replace('/\\D/ui', '', (string)$value);
+        $this->value = (string) $value;
     }
 
     public function __toString(): string
@@ -16,3 +16,4 @@ class LearnProgramId implements \Stringable
         return $this->value;
     }
 }
+

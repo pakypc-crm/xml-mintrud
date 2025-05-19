@@ -7,7 +7,7 @@ namespace crm\models;
 
 
 
-use Pakypc\XMLMintrud\XML\Snils;
+use Pakypc\XMLMintrud\XMLDocument\Snils;
 
 /**
  * Class customStudent

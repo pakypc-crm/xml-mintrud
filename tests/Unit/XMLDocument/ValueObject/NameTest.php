@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\ValueObject;
+namespace Tests\Unit\XMLDocument\ValueObject;
 
-use Pakypc\XMLMintrud\ValueObject\Name;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Name;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

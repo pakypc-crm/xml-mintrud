@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\ValueObject;
+namespace Tests\Unit\XMLDocument\ValueObject;
 
-use Pakypc\XMLMintrud\ValueObject\Citizenship;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

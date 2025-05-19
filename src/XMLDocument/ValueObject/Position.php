@@ -1,8 +1,8 @@
 <?php
 
-namespace Pakypc\XMLMintrud\ValueObject;
+namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Title implements \Stringable
+class Position implements \Stringable
 {
     private readonly string $value;
 
@@ -16,3 +16,4 @@ class Title implements \Stringable
         return $this->value;
     }
 }
+

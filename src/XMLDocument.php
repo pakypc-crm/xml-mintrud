@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pakypc\XMLMintrud\XML;
+namespace Pakypc\XMLMintrud;
 
 use crm\models\CustomStudent;
 use crm\models\CustomStudProf;
@@ -11,6 +11,8 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use DOMDocument;
+use Pakypc\XMLMintrud\XMLDocument\CommonData;
+use Pakypc\XMLMintrud\XMLDocument\XMLRecord;
 use Stringable;
 
 /**
@@ -83,7 +85,7 @@ final class XMLDocument implements Stringable
             $organization,
             $this->commonData
         );
-        
+
         return $this;
     }
 
@@ -96,17 +98,17 @@ final class XMLDocument implements Stringable
     {
         $dom = new DOMDocument('1.0', 'utf-8');
         $dom->formatOutput = true;
-        
+
         // Создаем корневой элемент
         $rootElement = $dom->createElement('RegistrySet');
         $dom->appendChild($rootElement);
-        
+
         // Добавляем все записи
         foreach ($this->records as $record) {
             $recordElement = $record->toXml($dom);
             $rootElement->appendChild($recordElement);
         }
-        
+
         return $dom->saveXML();
     }
 
@@ -119,10 +121,10 @@ final class XMLDocument implements Stringable
     public function validate(?string $schemaPath = null): bool
     {
         $schemaPath = $schemaPath ?? __DIR__ . '/../../resources/educated_person_import_v1.0.8.xsd';
-        
+
         $dom = new DOMDocument();
         $dom->loadXML($this->__toString());
-        
+
         return $dom->schemaValidate($schemaPath);
     }
 
@@ -136,7 +138,7 @@ final class XMLDocument implements Stringable
     {
         return file_put_contents($filePath, $this->__toString()) !== false;
     }
-    
+
     /**
      * Возвращает количество записей в документе
      *

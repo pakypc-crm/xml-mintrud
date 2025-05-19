@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\ValueObject;
+namespace Tests\Unit\XMLDocument\ValueObject;
 
-use Pakypc\XMLMintrud\ValueObject\Snils;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Snils;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

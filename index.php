@@ -100,8 +100,7 @@
 // Загружаем автозагрузчик Composer
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Pakypc\XMLMintrud\XML\XMLRenderer;
-use Pakypc\XMLMintrud\XML\Exception\XMLRenderException;
+use Pakypc\XMLMintrud\XMLRenderer;
 
 // Путь к XML файлу (по умолчанию используем sample-data.xml)
 $xmlFile = __DIR__ . '/sample-data.xml';

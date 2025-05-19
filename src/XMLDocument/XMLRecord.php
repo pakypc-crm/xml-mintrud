@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pakypc\XMLMintrud\XML;
+namespace Pakypc\XMLMintrud\XMLDocument;
 
 use crm\models\CustomStudent;
 use crm\models\CustomStudProf;
@@ -11,15 +11,15 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use DateTimeImmutable;
-use Pakypc\XMLMintrud\ValueObject\Snils;
-use Pakypc\XMLMintrud\ValueObject\Name;
-use Pakypc\XMLMintrud\ValueObject\Title;
-use Pakypc\XMLMintrud\ValueObject\Inn;
-use Pakypc\XMLMintrud\ValueObject\Position;
-use Pakypc\XMLMintrud\ValueObject\LearnProgramId;
-use Pakypc\XMLMintrud\ValueObject\ProtocolNumber;
-use Pakypc\XMLMintrud\ValueObject\Citizenship;
-use Pakypc\XMLMintrud\ValueObject\OuterId;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Inn;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramId;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Name;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OuterId;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Position;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\ProtocolNumber;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Snils;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Title;
 
 /**
  * DTO для хранения данных о записи учащегося

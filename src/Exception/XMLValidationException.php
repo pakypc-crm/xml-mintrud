@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pakypc\XMLMintrud\XML\Exception;
+namespace Pakypc\XMLMintrud\Exception;
 
 /**
  * Исключение, возникающее при ошибке валидации XML

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pakypc\XMLMintrud\ValueObject;
+namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
 class ProtocolNumber implements \Stringable
 {

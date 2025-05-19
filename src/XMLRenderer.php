@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pakypc\XMLMintrud\XML;
+namespace Pakypc\XMLMintrud;
 
-use Pakypc\XMLMintrud\XML\Exception\XMLRenderException;
 use DOMDocument;
+use Pakypc\XMLMintrud\Exception\XMLRenderException;
 
 /**
  * Класс для преобразования XML в HTML с использованием Bootstrap 3

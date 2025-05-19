@@ -1,15 +1,15 @@
 <?php
 
-namespace Pakypc\XMLMintrud\ValueObject;
+namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Name implements \Stringable
+class Inn implements \Stringable
 {
     private readonly string $value;
 
     public function __construct (string $value)
     {
-        #Убираем пробелы в начале и в конце
-        $this->value = trim($value);
+        # Убираем не цифры
+        $this->value = preg_replace('/\\D/ui', '', $value);
     }
 
     public function __toString(): string
