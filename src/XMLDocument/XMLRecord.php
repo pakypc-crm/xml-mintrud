@@ -116,8 +116,8 @@ final class XMLRecord
             $testDate, // Дата экзамена
             new ProtocolNumber($studentInGroup->certNumber), // Номер протокола
             new Title($program->name), // Название программы обучения
-            $studentInGroup->examenated, // Признак успешной сдачи экзамена
-            new LearnProgramId($program->id), // ID программы обучения по схеме
+            (bool) $studentInGroup->examenated, // Признак успешной сдачи экзамена
+            new LearnProgramId($program->mintrudId), // ID программы обучения по схеме
             new OuterId($student->id), // Внешний идентификатор записи
         );
     }
