@@ -1,67 +1,8 @@
-# PHP - Composer
+/.*/
+!/.github/
+/runtime/
 /vendor/
-composer.lock
-
-# PHP - Environment
-.env
-.env.backup
-.env.local
-.env.*.local
-
-# PHP - Cache
-*.cache
-
-/examples
-
-# IDE - PHPStorm
-.idea/
-*.iml
-*.iws
-*.ipr
-.idea_modules/
-
-# IDE - VS Code
-.vscode/
-*.code-workspace
-
-# Editor configs
-.editorconfig
-
-# System files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Logs
-logs/
+/.env
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Temp files
-/tmp/
-*.tmp
-*.swp
-*.swo
-
-# Build artifacts
-/build/
-/dist/
-/public/build/
-/public/hot/
-/public/storage/
-
-# Testing
-/phpunit.xml
-/.phpunit.result.cache
-/coverage/
-
-# Dependencies
-/node_modules/
-/bower_components/
-
-# User-specific files
-/.php_cs.cache
-/.php-cs-fixer.cache
-/.phpstan.cache
+*.exe
+/*.lock

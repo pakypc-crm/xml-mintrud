@@ -1,0 +1,12 @@
+* text=auto
+
+.github                export-ignore
+.*                     export-ignore
+*.dist                 export-ignore
+*.yaml                 export-ignore
+*.xml                  export-ignore
+composer.lock          export-ignore
+infection.*            export-ignore
+tests                  export-ignore
+docs                   export-ignore
+index.php              export-ignore

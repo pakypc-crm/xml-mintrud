@@ -24,7 +24,7 @@
 
 Нужен сервис на PHP, который принимает на вход сущности (студенты, учебная группа, организации и т.д.), а на выходе генерирует XML документ.
 
-На XML документ есть XML-схема 'resurces/educated_person_import_v1.0.8.xsd'.
+На XML документ есть XML-схема 'resources/educated_person_import_v1.0.8.xsd'.
 
 Нужно разобраться в XML схеме и понять, какие поля из каких сущностей понадобятся.
 
@@ -50,3 +50,77 @@ to do
 не забыть про гайды при генерации кода
 
 реaлизуй через метод add
+
+
+
+
+используй для каждого поля XMLRecord и CommonData соответствующие value object.
+value object должны быть stringable.
+
+unit тесты
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+XMLRenderer
+php -S localhost:80 index.php
+
+class XMLRenderer {
+public static function fromFile(string $xmlFile): self {}
+public static function fromString(string $xml): self {}
+public function toHtml(): string {}
+public function toFile(): string {}
+}
+
+XMLRenderer::fromFile($file)->toHtml()
+
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
++ вручную удалить стили
+- сделать верстку на bootstrap 3
+- bootstrap 3 подключить в index.php
+- сырые данные в таблице
+
+
+посмотри проект в 'src/', нужно написать скрипт для рендера данных под этот проект, используй за основу этот код:
+
+
+```php
+class XMLRenderer {
+public static function fromFile(string $xmlFile): self {}
+public static function fromString(string $xml): self {}
+public function toHtml(): string {}
+public function toFile(): string {}
+}
+
+```
+итог должен выводиться на страничке index.php, которая находится в 'iz_crm\', реализуй это при помощи bootstrap 3, данные не форматированными должны выводиться автоматически в виде таблицы,
+отвечай на русском!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+почитать value object
+подумать в XMLRecord вместо встроенных типов использовать  value object
+
+
+
++Name
+    FirstName
+    MiddleName
+    LastName
++Inn
+    OrganizationInn
+    EmployerInn
++Snils
+    Snils
+    ForeignSnils
++Title
+    EmployerTitle
+    OrganizationTitle
+    LearnProgramTitle
++Citizenship
++Position
++ProtocolNumber
+
+регэкспы почитать

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pakypc\XMLMintrud\Model;
+namespace crm\models;
 
 abstract class baseRecord
 {
