@@ -36,8 +36,8 @@ final class XMLRecord
      * @param Name $middleName Отчество работника
      * @param Snils $snils СНИЛС работника
      * @param bool|null $isForeignSnils Признак иностранного СНИЛС
-     * @param Snils $foreignSnils Иностранный СНИЛС
-     * @param Citizenship $citizenship Гражданство
+     * @param ?Snils $foreignSnils Иностранный СНИЛС
+     * @param ?Citizenship $citizenship Гражданство
      * @param Position $position Должность
      * @param Inn $employerInn ИНН работодателя
      * @param Title $employerTitle Название работодателя
@@ -56,8 +56,8 @@ final class XMLRecord
         private readonly Name $middleName,
         private readonly Snils $snils,
         private readonly ?bool $isForeignSnils,
-        private readonly Snils $foreignSnils,
-        private readonly Citizenship $citizenship,
+        private readonly ?Snils $foreignSnils,
+        private readonly ?Citizenship $citizenship,
         private readonly Position $position,
         private readonly Inn $employerInn,
         private readonly Title $employerTitle,
@@ -112,18 +112,18 @@ final class XMLRecord
             new Snils($student->snilsNumber), // СНИЛС
             null, // IsForeignSnils - по умолчанию null
             null, // ForeignSnils - по умолчанию null
-            null, // Citizenship - по умолчанию null
-            $position->post ?? 'Специалист', // Должность
-            $organization->orgINN ?? '0000000000', // ИНН работодателя
-            $organization->orgName, // Название работодателя
-            $commonData->getOrganizationInn(), // ИНН организации обучения
-            $commonData->getOrganizationTitle(), // Название организации обучения
+            null, //Citizenship - по умолчанию null,
+            new Position($position->post ?? 'Специалист'), // Должность
+            new Inn($organization->orgINN ?? '0000000000'), // ИНН работодателя
+            new Title($organization->orgName), // Название работодателя
+            new Inn($commonData->getOrganizationInn()), // ИНН организации обучения
+            new Title($commonData->getOrganizationTitle()), // Название организации обучения
             $testDate, // Дата экзамена
-            $protocolNumber, // Номер протокола
-            $program->name, // Название программы обучения
+            new ProtocolNumber($protocolNumber), // Номер протокола
+            new Title($program->name), // Название программы обучения
             $studentInGroup->examenated, // Признак успешной сдачи экзамена
-            $program->id, // ID программы обучения по схеме
-            (string) $student->id, // Внешний идентификатор записи
+            new LearnProgramId($program->id), // ID программы обучения по схеме
+            new OuterId($student->id), // Внешний идентификатор записи
         );
     }
 
