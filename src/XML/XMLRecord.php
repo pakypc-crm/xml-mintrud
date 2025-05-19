@@ -106,10 +106,10 @@ final class XMLRecord
             : ('PROT-' . $group->id . '-' . $student->id);
 
         return new self(
-            $student->name2, // Фамилия
-            $student->name1, // Имя
-            $student->name3, // Отчество
-            $student->snilsNumber, // СНИЛС
+            new Name($student->name2), // Фамилия
+            new Name($student->name1), // Имя
+            new Name($student->name3), // Отчество
+            new Snils($student->snilsNumber), // СНИЛС
             null, // IsForeignSnils - по умолчанию null
             null, // ForeignSnils - по умолчанию null
             null, // Citizenship - по умолчанию null

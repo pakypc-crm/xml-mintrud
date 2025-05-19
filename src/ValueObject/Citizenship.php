@@ -8,7 +8,7 @@ class Citizenship implements \Stringable
 
     public function __construct (string $value)
     {
-        $this->value = rtrim(trim($value));
+        $this->value = trim($value);
     }
 
     public function __toString(): string

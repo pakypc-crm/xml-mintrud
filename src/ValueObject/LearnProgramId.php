@@ -8,7 +8,7 @@ class LearnProgramId implements \Stringable
 
     public function __construct (string $value)
     {
-        $this->value = rtrim(trim($value));
+        $this->value = preg_replace('/\\D/ui', '', $value);
     }
 
     public function __toString(): string

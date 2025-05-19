@@ -9,10 +9,10 @@ class Snils implements \Stringable
     public function __construct (string $value)
     {
         # Убираем недопустимые символы
-        $value = str_replace(['-', ' '], '', $value);
+        $num = preg_replace('/\\D/ui', '', $value);
 
-        # Вставляем дефис после каждых 3-х символов
-        $this->value = wordwrap($value, 3, '-', true);
+        # Приводим к формату XXX-XXX-XXX XX
+        $this->value = sprintf('%s-%s-%s %s', substr($num, 0, 3), substr($num, 3, 3), substr($num, 6, 3), substr($num, 9));
     }
 
     public function __toString(): string

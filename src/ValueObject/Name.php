@@ -9,7 +9,7 @@ class Name implements \Stringable
     public function __construct (string $value)
     {
         #Убираем пробелы в начале и в конце
-        $this->value = rtrim(trim($value));
+        $this->value = trim($value);
     }
 
     public function __toString(): string

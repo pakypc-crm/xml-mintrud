@@ -8,8 +8,8 @@ class Inn implements \Stringable
 
     public function __construct (string $value)
     {
-        # Убираем недопустимые символы
-        $this->value = str_replace(['-', ' '], '', $value);
+        # Убираем не цифры
+        $this->value = preg_replace('/\\D/ui', '', $value);
     }
 
     public function __toString(): string
