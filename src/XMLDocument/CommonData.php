@@ -17,24 +17,8 @@ final class CommonData
      * @param string $organizationTitle Название организации обучения
      */
     public function __construct(
-        private readonly string $organizationInn,
-        private readonly string $organizationTitle,
+        public readonly string $organizationInn,
+        public readonly string $organizationTitle,
     ) {
-    }
-
-    /**
-     * Возвращает ИНН организации обучения
-     */
-    public function getOrganizationInn(): string
-    {
-        return $this->organizationInn;
-    }
-
-    /**
-     * Возвращает название организации обучения
-     */
-    public function getOrganizationTitle(): string
-    {
-        return $this->organizationTitle;
     }
 }

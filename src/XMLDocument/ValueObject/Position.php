@@ -6,9 +6,9 @@ class Position implements \Stringable
 {
     private readonly string $value;
 
-    public function __construct (string $value)
+    public function __construct (?string $value)
     {
-        $this->value = trim($value);
+        $this->value = trim((string) $value);
     }
 
     public function __toString(): string

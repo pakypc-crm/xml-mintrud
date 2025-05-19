@@ -75,12 +75,12 @@ final class XMLRecord
     /**
      * Создает экземпляр XMLRecord на основе данных из CRM
      *
-     * @param CustomStudent $student Данные студента
-     * @param \crm\models\StudentInGroup $studentInGroup Данные студента в группе
-     * @param \crm\models\CustomStudProf $position Данные о должности студента
-     * @param \crm\models\EduGroup $group Данные о группе обучения
-     * @param EduProgram $program Данные о программе обучения
-     * @param \crm\models\Organization $organization Данные об организации
+     * @param customStudent $student Данные студента
+     * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
+     * @param \crm\models\customStudProf $position Данные о должности студента
+     * @param \crm\models\eduGroup $group Данные о группе обучения
+     * @param eduProgram $program Данные о программе обучения
+     * @param \crm\models\organization $organization Данные об организации
      * @param CommonData $commonData Общие данные
      * @return self Экземпляр XMLRecord
      */
@@ -100,11 +100,6 @@ final class XMLRecord
                 ? new DateTimeImmutable($group->examen)
                 : new DateTimeImmutable());
 
-        // Получаем номер протокола (используем номер сертификата, если есть)
-        $protocolNumber = !empty($studentInGroup->certNumber)
-            ? $studentInGroup->certNumber
-            : ('PROT-' . $group->id . '-' . $student->id);
-
         return new self(
             new Name($student->name2), // Фамилия
             new Name($student->name1), // Имя
@@ -113,13 +108,13 @@ final class XMLRecord
             null, // IsForeignSnils - по умолчанию null
             null, // ForeignSnils - по умолчанию null
             null, //Citizenship - по умолчанию null,
-            new Position($position->post ?? 'Специалист'), // Должность
-            new Inn($organization->orgINN ?? '0000000000'), // ИНН работодателя
+            new Position($position->post), // Должность
+            new Inn($organization->orgINN), // ИНН работодателя
             new Title($organization->orgName), // Название работодателя
-            new Inn($commonData->getOrganizationInn()), // ИНН организации обучения
-            new Title($commonData->getOrganizationTitle()), // Название организации обучения
+            new Inn($commonData->organizationInn), // ИНН организации обучения
+            new Title($commonData->organizationTitle), // Название организации обучения
             $testDate, // Дата экзамена
-            new ProtocolNumber($protocolNumber), // Номер протокола
+            new ProtocolNumber($studentInGroup->certNumber), // Номер протокола
             new Title($program->name), // Название программы обучения
             $studentInGroup->examenated, // Признак успешной сдачи экзамена
             new LearnProgramId($program->id), // ID программы обучения по схеме
