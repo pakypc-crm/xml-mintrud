@@ -10,6 +10,7 @@ use crm\models\EduGroup;
 use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
+use crm\models\studentInGroupProgEx;
 use DateTimeImmutable;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Inn;
@@ -77,6 +78,7 @@ final class XMLRecord
      *
      * @param customStudent $student Данные студента
      * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
+     * @param \crm\models\studentInGroupProgEx $studentInGroupProgEx
      * @param \crm\models\customStudProf $position Данные о должности студента
      * @param \crm\models\eduGroup $group Данные о группе обучения
      * @param eduProgram $program Данные о программе обучения
@@ -87,18 +89,21 @@ final class XMLRecord
     public static function create(
         CustomStudent $student,
         StudentInGroup $studentInGroup,
+        studentInGroupProgEx $studentInGroupProgEx,
         CustomStudProf $position,
         EduGroup $group,
         EduProgram $program,
         Organization $organization,
         CommonData $commonData
     ): self {
-        // Получаем дату экзамена
-        $testDate = !empty($studentInGroup->examendate)
-            ? new DateTimeImmutable($studentInGroup->examendate)
-            : (!empty($group->examen)
-                ? new DateTimeImmutable($group->examen)
-                : new DateTimeImmutable());
+        // если есть флаг "своя дата экзамена", то берём свою дату экзамена
+        $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;
+
+        // Если с предыдущего шага получили null, то берём следующие даты в порядке приоритета
+        $dateStr ??= $studentInGroup->examendate ?? $group->examen;
+
+        // Получаем объект даты/времени
+        $testDate = new DateTimeImmutable($dateStr);
 
         return new self(
             new Name($student->name2), // Фамилия
