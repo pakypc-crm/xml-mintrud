@@ -112,14 +112,14 @@ final class XMLRecord
             new Snils($student->snilsNumber), // СНИЛС
             null, // IsForeignSnils - по умолчанию null
             null, // ForeignSnils - по умолчанию null
-            null, //Citizenship - по умолчанию null,
+            null, // Citizenship - по умолчанию null
             new Position($position->post), // Должность
             new Inn($organization->orgINN), // ИНН работодателя
             new Title($organization->orgName), // Название работодателя
             new Inn($commonData->organizationInn), // ИНН организации обучения
             new Title($commonData->organizationTitle), // Название организации обучения
             $testDate, // Дата экзамена
-            new ProtocolNumber($studentInGroup->certNumber), // Номер протокола
+            new ProtocolNumber($studentInGroupProgEx->sPr_protoNumber), // Номер протокола
             new Title($program->name), // Название программы обучения
             (bool) $studentInGroup->examenated, // Признак успешной сдачи экзамена
             new LearnProgramId($program->mintrudId), // ID программы обучения по схеме
