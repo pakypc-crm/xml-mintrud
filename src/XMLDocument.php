@@ -10,6 +10,7 @@ use crm\models\EduGroup;
 use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
+use crm\models\studentInGroupProgEx;
 use DOMDocument;
 use Pakypc\XMLMintrud\XMLDocument\CommonData;
 use Pakypc\XMLMintrud\XMLDocument\XMLRecord;
@@ -62,6 +63,7 @@ final class XMLDocument implements Stringable
      *
      * @param \crm\models\CustomStudent $student Данные студента
      * @param StudentInGroup $studentInGroup Данные студента в группе
+     * @param studentInGroupProgEx $studentInGroupProgEx Дополнительные данные о программе обучения
      * @param CustomStudProf $position Данные о должности студента
      * @param EduGroup $group Данные о группе обучения
      * @param \crm\models\EduProgram $program Данные о программе обучения
@@ -71,6 +73,7 @@ final class XMLDocument implements Stringable
     public function add(
         CustomStudent $student,
         StudentInGroup $studentInGroup,
+        studentInGroupProgEx $studentInGroupProgEx,
         CustomStudProf $position,
         EduGroup $group,
         EduProgram $program,
@@ -79,6 +82,7 @@ final class XMLDocument implements Stringable
         $this->records[] = XMLRecord::create(
             $student,
             $studentInGroup,
+            $studentInGroupProgEx,
             $position,
             $group,
             $program,
