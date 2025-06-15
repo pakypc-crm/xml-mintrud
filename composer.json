@@ -1,6 +1,8 @@
 {
     "name": "pakypc/xml-mintrud",
     "type": "library",
+    "description": "генератор документа для минтруд",
+    "license": "BSD-3-Clause",
     "require": {
         "ext-dom": "*"
     },
