@@ -1,7 +1,8 @@
 <?php
 
-namespace Pakypc\XMLMintrud\Exception;
+declare(strict_types=1);
 
+namespace Pakypc\XMLMintrud\Exception;
 
 use crm\models\customStudent;
 use crm\models\customStudProf;

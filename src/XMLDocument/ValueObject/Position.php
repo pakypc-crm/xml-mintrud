@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
 class Position implements \Stringable
 {
     private readonly string $value;
 
-    public function __construct (?string $value)
+    public function __construct(?string $value)
     {
-        $this->value = trim((string) $value);
+        $this->value = \trim((string) $value);
     }
 
     public function __toString(): string
@@ -16,4 +18,3 @@ class Position implements \Stringable
         return $this->value;
     }
 }
-

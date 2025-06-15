@@ -26,15 +26,15 @@ use Pakypc\XMLMintrud\Exception\XMLRenderException;
  */
 final class XMLRenderer
 {
-    /** @var DOMDocument XML документ */
-    private DOMDocument $document;
+    /** @var \DOMDocument XML документ */
+    private \DOMDocument $document;
 
     /**
      * Создает экземпляр XMLRenderer из объекта DOMDocument
      *
-     * @param DOMDocument $document DOM документ
+     * @param \DOMDocument $document DOM документ
      */
-    private function __construct(DOMDocument $document)
+    private function __construct(\DOMDocument $document)
     {
         $this->document = $document;
     }
@@ -48,11 +48,11 @@ final class XMLRenderer
      */
     public static function fromFile(string $xmlFile): self
     {
-        if (!file_exists($xmlFile)) {
+        if (!\file_exists($xmlFile)) {
             throw new XMLRenderException("Файл XML не найден: {$xmlFile}");
         }
 
-        $document = new DOMDocument();
+        $document = new \DOMDocument();
 
         // Подавляем ошибки и затем проверяем успешность загрузки
         $result = @$document->load($xmlFile);
@@ -73,7 +73,7 @@ final class XMLRenderer
      */
     public static function fromString(string $xml): self
     {
-        $document = new DOMDocument();
+        $document = new \DOMDocument();
 
         // Подавляем ошибки и затем проверяем успешность загрузки
         $result = @$document->loadXML($xml);
@@ -166,11 +166,11 @@ final class XMLRenderer
             $sizeClass = ''; // По умолчанию нет дополнительного класса
 
             // Определяем размер колонки в зависимости от типа данных
-            if (in_array($columnName, ['outerId', 'learnProgramId', 'isPassed'])) {
+            if (\in_array($columnName, ['outerId', 'learnProgramId', 'isPassed'])) {
                 $sizeClass = 'narrow-col';
-            } elseif (in_array($columnName, ['FirstName', 'LastName', 'MiddleName', 'Snils', 'Position'])) {
+            } elseif (\in_array($columnName, ['FirstName', 'LastName', 'MiddleName', 'Snils', 'Position'])) {
                 $sizeClass = 'medium-col';
-            } elseif (in_array($columnName, ['OrgTitle', 'EmployerTitle', 'LearnProgramTitle'])) {
+            } elseif (\in_array($columnName, ['OrgTitle', 'EmployerTitle', 'LearnProgramTitle'])) {
                 $sizeClass = 'wide-col';
             }
 
@@ -201,9 +201,9 @@ final class XMLRenderer
                     if ($test && $test->hasAttribute('learnProgramId')) {
                         $value = $test->getAttribute('learnProgramId');
                     }
-                } elseif (strpos($columnName, 'Org') === 0) {
+                } elseif (\strpos($columnName, 'Org') === 0) {
                     // Для полей Organization
-                    $orgColumnName = substr($columnName, 3); // Удаляем префикс 'Org'
+                    $orgColumnName = \substr($columnName, 3); // Удаляем префикс 'Org'
                     $organization = $record->getElementsByTagName('Organization')->item(0);
                     $value = $this->getElementValue($organization, $orgColumnName);
                 } else {
@@ -236,6 +236,17 @@ final class XMLRenderer
     }
 
     /**
+     * Сохраняет HTML-представление в файл
+     *
+     * @param string $outputFile Путь к файлу для сохранения
+     * @return bool Результат сохранения
+     */
+    public function toFile(string $outputFile): bool
+    {
+        return \file_put_contents($outputFile, $this->toHtml()) !== false;
+    }
+
+    /**
      * Получает значение элемента по имени тега
      *
      * @param \DOMNode|null $parentNode Родительский узел
@@ -255,16 +266,5 @@ final class XMLRenderer
         }
 
         return '';
-    }
-
-    /**
-     * Сохраняет HTML-представление в файл
-     *
-     * @param string $outputFile Путь к файлу для сохранения
-     * @return bool Результат сохранения
-     */
-    public function toFile(string $outputFile): bool
-    {
-        return file_put_contents($outputFile, $this->toHtml()) !== false;
     }
 }

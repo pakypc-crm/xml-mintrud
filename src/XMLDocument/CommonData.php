@@ -19,6 +19,5 @@ final class CommonData
     public function __construct(
         public readonly string $organizationInn,
         public readonly string $organizationTitle,
-    ) {
-    }
+    ) {}
 }

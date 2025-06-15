@@ -70,15 +70,13 @@ final class XMLRecord
         private readonly bool $isPassed,
         private readonly LearnProgramId $learnProgramId,
         private readonly OuterId $outerId,
-    ) {
-    }
+    ) {}
 
     /**
      * Создает экземпляр XMLRecord на основе данных из CRM
      *
      * @param customStudent $student Данные студента
      * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
-     * @param \crm\models\studentInGroupProgEx $studentInGroupProgEx
      * @param \crm\models\customStudProf $position Данные о должности студента
      * @param \crm\models\eduGroup $group Данные о группе обучения
      * @param eduProgram $program Данные о программе обучения
@@ -94,7 +92,7 @@ final class XMLRecord
         EduGroup $group,
         EduProgram $program,
         Organization $organization,
-        CommonData $commonData
+        CommonData $commonData,
     ): self {
         // если есть флаг "своя дата экзамена", то берём свою дату экзамена
         $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;

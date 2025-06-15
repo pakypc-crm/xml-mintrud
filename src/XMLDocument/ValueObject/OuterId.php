@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
 class OuterId implements \Stringable
 {
     private readonly string $value;
 
-    public function __construct (string|int $value)
+    public function __construct(string|int $value)
     {
         $this->value = (string) $value;
     }
@@ -16,4 +18,3 @@ class OuterId implements \Stringable
         return $this->value;
     }
 }
-
