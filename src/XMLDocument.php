@@ -40,8 +40,9 @@ final class XMLDocument implements Stringable
 {
     /** @var list<XMLRecord> Список записей учащихся */
     private array $records = [];
-    /** @var list<Throwable> Список ошибок документа */
+    /** @var list<DocumentError> Список ошибок документа */
     private array $exceptions = [];
+
 
     /**
      * @param CommonData $commonData Общие данные для XML-документа
@@ -100,6 +101,7 @@ final class XMLDocument implements Stringable
                 $exception,
                 $student,
                 $studentInGroup,
+                $studentInGroupProgEx,
                 $position,
                 $group,
                 $program,
@@ -129,6 +131,12 @@ final class XMLDocument implements Stringable
         }
 
         return $dom->saveXML();
+    }
+
+    /** @return  list<DocumentError> Список ошибок документа */
+    public function getExceptions(): array
+    {
+        return $this->exceptions;
     }
 
     /**

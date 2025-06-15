@@ -6,7 +6,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^12.2",
-        "vimeo/psalm": "^6.10"
+        "vimeo/psalm": "^6.10",
+        "spiral/code-style": "^2.2"
     },
     "autoload": {
         "psr-4": {
