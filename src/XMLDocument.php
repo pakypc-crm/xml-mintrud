@@ -11,8 +11,10 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use DOMDocument;
+use Pakypc\XMLMintrud\Exception\DocumentError;
 use Pakypc\XMLMintrud\XMLDocument\CommonData;
 use Pakypc\XMLMintrud\XMLDocument\XMLRecord;
+use PHPUnit\Event\Code\Throwable;
 use Stringable;
 
 /**
@@ -37,6 +39,8 @@ final class XMLDocument implements Stringable
 {
     /** @var list<XMLRecord> Список записей учащихся */
     private array $records = [];
+    /** @var list<Throwable> Список ошибок документа */
+    private array $exceptions = [];
 
     /**
      * @param CommonData $commonData Общие данные для XML-документа
@@ -76,16 +80,27 @@ final class XMLDocument implements Stringable
         EduProgram $program,
         Organization $organization,
     ): self {
-        $this->records[] = XMLRecord::create(
-            $student,
-            $studentInGroup,
-            $position,
-            $group,
-            $program,
-            $organization,
-            $this->commonData
-        );
-
+        try {
+            $this->records[] = XMLRecord::create(
+                $student,
+                $studentInGroup,
+                $position,
+                $group,
+                $program,
+                $organization,
+                $this->commonData
+            );
+        }
+        catch (\Throwable $exception) {
+            $this->exceptions[] = new DocumentError(
+                $exception,
+                $student,
+                $studentInGroup,
+                $position,
+                $group,
+                $program,
+                $organization);
+        }
         return $this;
     }
 

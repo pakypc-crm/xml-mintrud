@@ -11,7 +11,6 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
-use DateTimeImmutable;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Inn;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramId;
@@ -21,6 +20,7 @@ use Pakypc\XMLMintrud\XMLDocument\ValueObject\Position;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\ProtocolNumber;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Snils;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Title;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Date;
 
 /**
  * DTO для хранения данных о записи учащегося
@@ -44,7 +44,7 @@ final class XMLRecord
      * @param Title $employerTitle Название работодателя
      * @param Inn $organizationInn ИНН организации обучения
      * @param Title $organizationTitle Название организации обучения
-     * @param DateTimeImmutable $testDate Дата экзамена
+     * @param Date $testDate Дата экзамена
      * @param ProtocolNumber $protocolNumber Номер протокола
      * @param Title $learnProgramTitle Название программы обучения
      * @param bool $isPassed Признак успешной сдачи экзамена
@@ -64,7 +64,7 @@ final class XMLRecord
         private readonly Title $employerTitle,
         private readonly Inn $organizationInn,
         private readonly Title $organizationTitle,
-        private readonly DateTimeImmutable $testDate,
+        private readonly Date $testDate,
         private readonly ProtocolNumber $protocolNumber,
         private readonly Title $learnProgramTitle,
         private readonly bool $isPassed,
@@ -103,7 +103,7 @@ final class XMLRecord
         $dateStr ??= $studentInGroup->examendate ?? $group->examen;
 
         // Получаем объект даты/времени
-        $testDate = new DateTimeImmutable($dateStr);
+        $testDate = new Date($dateStr);
 
         return new self(
             new Name($student->name2), // Фамилия
@@ -205,7 +205,7 @@ final class XMLRecord
         $testElement->setAttribute('learnProgramId', (string) $this->learnProgramId);
 
         // Добавляем Date
-        $testElement->appendChild($document->createElement('Date', $this->testDate->format('Y-m-d')));
+        $testElement->appendChild($document->createElement('Date', (string) $this->testDate));
 
         // Добавляем ProtocolNumber
         $testElement->appendChild($document->createElement('ProtocolNumber', (string) $this->protocolNumber));
