@@ -6,18 +6,21 @@ namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
 use Pakypc\XMLMintrud\Exception\ValidationException;
 
-class Date
+/**
+ *  Value Object для даты экзамена
+ */
+class ExamDate
 {
-    private readonly \DateTimeImmutable|string $date;
+    private readonly \DateTimeImmutable|string $examDate;
 
-    public function __construct(?string $date)
+    public function __construct(?string $examDate)
     {
-        if ($date === null || $date === '') {
+        if ($examDate === null || $examDate === '') {
             throw new ValidationException('Дата сдачи экзамена не указана.');
         }
 
         try {
-            $this->date = new \DateTimeImmutable($date);
+            $this->examDate = new \DateTimeImmutable($examDate);
         } catch (\Throwable) {
             throw new ValidationException('Неверный формат даты в поле дата сдачи экзамена.');
         }
@@ -25,6 +28,6 @@ class Date
 
     public function __toString(): string
     {
-        return $this->date->format('Y-m-d');
+        return $this->examDate->format('Y-m-d');
     }
 }

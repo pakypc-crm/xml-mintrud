@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Inn implements \Stringable
+class EmployerInn implements \Stringable
 {
     private readonly string $value;
 
@@ -12,6 +12,10 @@ class Inn implements \Stringable
     {
         # Убираем не цифры
         $this->value = \preg_replace('/\\D/ui', '', (string) $value);
+
+        if ($this->value === '') {
+            throw new \InvalidArgumentException('ИНН работодателя не указан');
+        }
     }
 
     public function __toString(): string

@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\XMLDocument\ValueObject;
 
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\Name;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\FirstName;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-class NameTest extends TestCase
+class FirstNameTest extends TestCase
 {
     public static function getName()
     {
@@ -17,7 +17,7 @@ class NameTest extends TestCase
     #[DataProvider("getName")]
     public function testName(string $input, string $expected): void
     {
-        $name = new Name($input);
+        $name = new FirstName($input);
         $this->assertEquals($expected, (string) $name);
     }
 }

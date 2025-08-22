@@ -2,7 +2,9 @@
 
 namespace Tests\Unit\XMLDocument\ValueObject;
 
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerInn;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Inn;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationInn;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -15,9 +17,14 @@ class InnTest extends TestCase
     }
 
     #[DataProvider("getInn")]
-    public function testInn(string $input, string $expected): void
+    public function testOrganizationInn(string $input, string $expected): void
     {
-        $inn = new Inn($input);
+        $inn = new OrganizationInn($input);
+        $this->assertEquals($expected, (string) $inn);
+    }   #[DataProvider("getInn")]
+    public function testEmployerInn(string $input, string $expected): void
+    {
+        $inn = new EmployerInn($input);
         $this->assertEquals($expected, (string) $inn);
     }
 }

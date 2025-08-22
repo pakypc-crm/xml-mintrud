@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Name implements \Stringable
+class FirstName implements \Stringable
 {
     private readonly string $value;
 
