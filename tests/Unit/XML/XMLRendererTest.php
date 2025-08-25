@@ -37,7 +37,7 @@ final class XMLRendererTest extends TestCase
         </Worker>
         <Organization>
             <Inn>9876543210</Inn>
-            <Title>Учебный центр "Знание"</Title>
+            <EmployerTitle>Учебный центр "Знание"</EmployerTitle>
         </Organization>
         <Test isPassed="1" learnProgramId="42">
             <Date>2023-05-15</Date>
@@ -161,11 +161,11 @@ XML;
         // Assert
         self::assertSame($outputPath, $resultPath);
         self::assertFileExists($outputPath);
-        
+
         // Проверка содержимого файла
         $fileContent = file_get_contents($outputPath);
         self::assertStringContainsString('<!DOCTYPE html>', $fileContent);
-        
+
         // Удаляем временный файл
         unlink($outputPath);
     }
@@ -184,7 +184,7 @@ XML;
         // Assert
         self::assertFileExists($resultPath);
         self::assertStringContainsString('rendered_xml_', $resultPath);
-        
+
         // Удаляем временный файл
         unlink($resultPath);
     }

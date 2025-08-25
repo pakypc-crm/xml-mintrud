@@ -10,8 +10,8 @@ class SnilsTest extends TestCase
 {
     public static function getSnils()
     {
-        yield ["01234567890", "012-345-678-90"];
-        yield ["0   -1234 --5--6-7890 ", "012-345-678-90"];
+        yield ["01234567890", "012-345-678 90"];
+        yield ["0   -1234 --5--6-7890 ", "012-345-678 90"];
     }
 
     #[DataProvider("getSnils")]

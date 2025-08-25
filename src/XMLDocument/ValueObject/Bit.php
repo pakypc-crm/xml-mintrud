@@ -28,7 +28,7 @@ class Bit implements \Stringable
 {
     private readonly bool $value;
 
-    public function __construct(null|string|int $value)
+    public function __construct(null|string|int|bool $value)
     {
         if ($value === null) {
             throw new ValidationException('Значение bit не задано.');

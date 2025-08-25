@@ -10,9 +10,10 @@ class EmployerInn implements \Stringable
 
     public function __construct(?string $value)
     {
-        # Убираем не цифры
+        // Убираем не цифры
         $this->value = \preg_replace('/\\D/ui', '', (string) $value);
 
+        //Проверка на незаданное значение
         if ($this->value === '') {
             throw new \InvalidArgumentException('ИНН работодателя не указан');
         }

@@ -10,6 +10,7 @@ class Citizenship implements \Stringable
 
     public function __construct(string $value)
     {
+        //Удаляем пустые символы в начале и в конце строки
         $this->value = \trim($value);
     }
 

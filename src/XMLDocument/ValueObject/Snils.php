@@ -10,12 +10,13 @@ class Snils implements \Stringable
 
     public function __construct(?string $value)
     {
-        # Убираем недопустимые символы
+        // Убираем недопустимые символы
         $num = \preg_replace('/\\D/ui', '', (string) $value);
 
-        # Приводим к формату XXX-XXX-XXX XX
+        // Приводим к формату XXX-XXX-XXX XX
         $num = \sprintf('%s-%s-%s %s', \substr($num, 0, 3), \substr($num, 3, 3), \substr($num, 6, 3), \substr($num, 9));
         $this->value = \trim($num, ' -');
+
     }
 
     public function __toString(): string
