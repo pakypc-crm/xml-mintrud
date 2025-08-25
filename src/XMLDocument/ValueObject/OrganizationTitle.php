@@ -24,4 +24,3 @@ class OrganizationTitle implements \Stringable
         return $this->value;
     }
 }
-
