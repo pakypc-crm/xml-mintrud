@@ -11,16 +11,22 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
-use DateTimeImmutable;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\Bit;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\Inn;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerInn;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationInn;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramId;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\Name;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\FirstName;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\MiddleName;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\LastName;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\OuterId;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Position;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\ProtocolNumber;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Snils;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\Title;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerTitle;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\ExamDate;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramTitle;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationTitle;
 
 /**
  * DTO для хранения данных о записи учащегося
@@ -32,53 +38,51 @@ use Pakypc\XMLMintrud\XMLDocument\ValueObject\Title;
 final class XMLRecord
 {
     /**
-     * @param Name $lastName Фамилия работника
-     * @param Name $firstName Имя работника
-     * @param Name $middleName Отчество работника
+     * @param LastName $lastName Фамилия работника
+     * @param FirstName $firstName Имя работника
+     * @param MiddleName $middleName Отчество работника
      * @param Snils $snils СНИЛС работника
      * @param bool|null $isForeignSnils Признак иностранного СНИЛС
      * @param ?Snils $foreignSnils Иностранный СНИЛС
      * @param ?Citizenship $citizenship Гражданство
      * @param Position $position Должность
-     * @param Inn $employerInn ИНН работодателя
-     * @param Title $employerTitle Название работодателя
-     * @param Inn $organizationInn ИНН организации обучения
-     * @param Title $organizationTitle Название организации обучения
-     * @param DateTimeImmutable $testDate Дата экзамена
+     * @param EmployerInn $employerInn ИНН работодателя
+     * @param EmployerTitle $employerTitle Название работодателя
+     * @param OrganizationInn $organizationInn ИНН организации обучения
+     * @param OrganizationTitle $organizationTitle Название организации обучения
+     * @param ExamDate $testDate Дата экзамена
      * @param ProtocolNumber $protocolNumber Номер протокола
-     * @param Title $learnProgramTitle Название программы обучения
-     * @param bool $isPassed Признак успешной сдачи экзамена
+     * @param LearnProgramTitle $learnProgramTitle Название программы обучения
+     * @param Bit $isPassed Признак успешной сдачи экзамена
      * @param LearnProgramId $learnProgramId ID программы обучения по схеме
      * @param OuterId $outerId Внешний идентификатор записи
      */
     private function __construct(
-        private readonly Name $lastName,
-        private readonly Name $firstName,
-        private readonly Name $middleName,
+        private readonly LastName $lastName,
+        private readonly FirstName $firstName,
+        private readonly MiddleName $middleName,
         private readonly Snils $snils,
         private readonly ?bool $isForeignSnils,
         private readonly ?Snils $foreignSnils,
         private readonly ?Citizenship $citizenship,
         private readonly Position $position,
-        private readonly Inn $employerInn,
-        private readonly Title $employerTitle,
-        private readonly Inn $organizationInn,
-        private readonly Title $organizationTitle,
-        private readonly DateTimeImmutable $testDate,
+        private readonly EmployerInn $employerInn,
+        private readonly EmployerTitle $employerTitle,
+        private readonly OrganizationInn $organizationInn,
+        private readonly OrganizationTitle $organizationTitle,
+        private readonly ExamDate $testDate,
         private readonly ProtocolNumber $protocolNumber,
-        private readonly Title $learnProgramTitle,
-        private readonly bool $isPassed,
+        private readonly LearnProgramTitle $learnProgramTitle,
+        private readonly Bit $isPassed,
         private readonly LearnProgramId $learnProgramId,
         private readonly OuterId $outerId,
-    ) {
-    }
+    ) {}
 
     /**
      * Создает экземпляр XMLRecord на основе данных из CRM
      *
      * @param customStudent $student Данные студента
      * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
-     * @param \crm\models\studentInGroupProgEx $studentInGroupProgEx
      * @param \crm\models\customStudProf $position Данные о должности студента
      * @param \crm\models\eduGroup $group Данные о группе обучения
      * @param eduProgram $program Данные о программе обучения
@@ -94,7 +98,7 @@ final class XMLRecord
         EduGroup $group,
         EduProgram $program,
         Organization $organization,
-        CommonData $commonData
+        CommonData $commonData,
     ): self {
         // если есть флаг "своя дата экзамена", то берём свою дату экзамена
         $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;
@@ -103,25 +107,25 @@ final class XMLRecord
         $dateStr ??= $studentInGroup->examendate ?? $group->examen;
 
         // Получаем объект даты/времени
-        $testDate = new DateTimeImmutable($dateStr);
+        $testDate = new ExamDate($dateStr);
 
         return new self(
-            new Name($student->name2), // Фамилия
-            new Name($student->name1), // Имя
-            new Name($student->name3), // Отчество
+            new LastName($student->name2), // Фамилия
+            new FirstName($student->name1), // Имя
+            new MiddleName($student->name3), // Отчество
             new Snils($student->snilsNumber), // СНИЛС
             null, // IsForeignSnils - по умолчанию null
             null, // ForeignSnils - по умолчанию null
             null, // Citizenship - по умолчанию null
             new Position($position->post), // Должность
-            new Inn($organization->orgINN), // ИНН работодателя
-            new Title($organization->orgName), // Название работодателя
-            new Inn($commonData->organizationInn), // ИНН организации обучения
-            new Title($commonData->organizationTitle), // Название организации обучения
+            new EmployerInn($organization->orgINN), // ИНН работодателя
+            new EmployerTitle($organization->orgName), // Название работодателя
+            new OrganizationInn($commonData->organizationInn), // ИНН организации обучения
+            new OrganizationTitle($commonData->organizationTitle), // Название организации обучения
             $testDate, // Дата экзамена
             new ProtocolNumber($studentInGroupProgEx->sPr_protoNumber), // Номер протокола
-            new Title($program->name), // Название программы обучения
-            (bool) $studentInGroup->examenated, // Признак успешной сдачи экзамена
+            new LearnProgramTitle($program->name), // Название программы обучения
+            new Bit($studentInGroup->examenated), // Признак успешной сдачи экзамена
             new LearnProgramId($program->mintrudId), // ID программы обучения по схеме
             new OuterId($student->id), // Внешний идентификатор записи
         );
@@ -189,8 +193,8 @@ final class XMLRecord
         // Добавляем Inn
         $organizationElement->appendChild($document->createElement('Inn', (string) $this->organizationInn));
 
-        // Добавляем Title
-        $organizationElement->appendChild($document->createElement('Title', (string) $this->organizationTitle));
+        // Добавляем EmployerTitle
+        $organizationElement->appendChild($document->createElement('EmployerTitle', (string) $this->organizationTitle));
 
         // Добавляем Organization в RegistryRecord
         $recordElement->appendChild($organizationElement);
@@ -199,13 +203,13 @@ final class XMLRecord
         $testElement = $document->createElement('Test');
 
         // Добавляем атрибут isPassed
-        $testElement->setAttribute('isPassed', $this->isPassed ? '1' : '0');
+        $testElement->setAttribute('isPassed', (string) $this->isPassed);
 
         // Добавляем атрибут learnProgramId
         $testElement->setAttribute('learnProgramId', (string) $this->learnProgramId);
 
         // Добавляем Date
-        $testElement->appendChild($document->createElement('Date', $this->testDate->format('Y-m-d')));
+        $testElement->appendChild($document->createElement('Date', (string) $this->testDate));
 
         // Добавляем ProtocolNumber
         $testElement->appendChild($document->createElement('ProtocolNumber', (string) $this->protocolNumber));

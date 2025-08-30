@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Citizenship implements \Stringable
+class MiddleName implements \Stringable
 {
     private readonly string $value;
 
     public function __construct(string $value)
     {
-        //Удаляем пустые символы в начале и в конце строки
+        #Убираем пробелы в начале и в конце
         $this->value = \trim($value);
     }
 

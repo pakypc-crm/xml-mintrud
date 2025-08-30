@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Position implements \Stringable
+class OrganizationTitle implements \Stringable
 {
     private readonly string $value;
 
@@ -15,7 +15,7 @@ class Position implements \Stringable
 
         //Проверка на незаданное значение
         if ($this->value === '') {
-            throw new \InvalidArgumentException('Должность сотрудника не указана');
+            throw new \InvalidArgumentException('Название организации обучения не задано');
         }
     }
 

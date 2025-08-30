@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Pakypc\XMLMintrud\XMLDocument\ValueObject;
 
-class Position implements \Stringable
+class EmployerInn implements \Stringable
 {
     private readonly string $value;
 
     public function __construct(?string $value)
     {
-        //Удаляем пустые символы в начале и в конце строки
-        $this->value = \trim((string) $value);
+        // Убираем не цифры
+        $this->value = \preg_replace('/\\D/ui', '', (string) $value);
 
         //Проверка на незаданное значение
         if ($this->value === '') {
-            throw new \InvalidArgumentException('Должность сотрудника не указана');
+            throw new \InvalidArgumentException('ИНН работодателя не указан.');
         }
     }
 
