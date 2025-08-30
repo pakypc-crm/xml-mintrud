@@ -51,7 +51,7 @@ class LearnProgramId implements \Stringable
         $value = (int) $value;
         if ($value < 1 or $value > 29) {
             throw new \InvalidArgumentException(
-                "ID программы в МинТруда быть от 1 до 29. ID: {$value}.",
+                "ID программы в МинТруда должен быть от 1 до 29. ID: {$value}.",
             );
         }
         $this->value = $value;
