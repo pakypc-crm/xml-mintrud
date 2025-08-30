@@ -15,7 +15,7 @@ class EmployerInn implements \Stringable
 
         //Проверка на незаданное значение
         if ($this->value === '') {
-            throw new \InvalidArgumentException('ИНН работодателя не указан');
+            throw new \InvalidArgumentException('ИНН работодателя не указан.');
         }
     }
 

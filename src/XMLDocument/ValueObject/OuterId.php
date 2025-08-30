@@ -22,16 +22,16 @@ class OuterId implements \Stringable
 {
     private readonly string $value;
 
-    public function __construct(?string $value)
+    public function __construct(null|string|int $value)
     {
         //Допустимые символы
         $pattern = '/^[A-Za-z0-9-]+$/';
 
         //Проверка символов
-        if ($value === null || $value === '' || \preg_match($pattern, $value) == 1) {
+        if ($value === null || $value === '' || \preg_match($pattern, (string) $value) === 1) {
             $this->value = (string) $value;
         } else {
-            throw new ValidationException('Строка содержит недопустимые символы');
+            throw new ValidationException('Внешний идентификатор содержит недопустимые символы.');
         }
     }
 
