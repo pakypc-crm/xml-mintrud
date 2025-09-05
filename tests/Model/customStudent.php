@@ -51,12 +51,12 @@ class customStudent extends baseStudent
     public ?string $lastvisit = null;
 
     /**
-     * Имя пользователя
+     * Фамилия пользователя
      */
     public string $name1;
 
     /**
-     * Фамилия пользователя
+     * Имя пользователя
      */
     public string $name2;
 

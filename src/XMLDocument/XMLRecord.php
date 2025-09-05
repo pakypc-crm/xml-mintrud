@@ -193,7 +193,7 @@ final class XMLRecord
         // Добавляем Inn
         $organizationElement->appendChild($document->createElement('Inn', (string) $this->organizationInn));
 
-        // Добавляем EmployerTitle
+        // Добавляем Title
         $organizationElement->appendChild($document->createElement('Title', (string) $this->organizationTitle));
 
         // Добавляем Organization в RegistryRecord
