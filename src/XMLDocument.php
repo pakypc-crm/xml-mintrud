@@ -120,14 +120,24 @@ final class XMLDocument implements \Stringable
      * @param string|null $schemaPath Путь к файлу XSD-схемы (если не указан, используется стандартный путь)
      * @return bool Результат валидации
      */
-    public function validate(?string $schemaPath = null): bool
+    public function validate(?string $schemaPath = null): array
     {
-        $schemaPath = $schemaPath ?? __DIR__ . '/../../resources/educated_person_import_v1.0.8.xsd';
+        $schemaPath = $schemaPath ?? __DIR__ . '/../resources/educated_person_import_v1.0.9.xsd';
 
         $dom = new \DOMDocument();
         $dom->loadXML($this->__toString());
 
-        return $dom->schemaValidate($schemaPath);
+        $errors = [];
+        $handler = \set_error_handler(static function ($errno, $errstr) use (&$errors): void {
+            $errors[] = new \ErrorException($errstr, $errno);
+        }, E_WARNING | E_NOTICE | E_STRICT);
+        try {
+            $dom->schemaValidate($schemaPath);
+        } finally {
+            \set_error_handler($handler);
+        }
+
+        return $errors;
     }
 
     /**

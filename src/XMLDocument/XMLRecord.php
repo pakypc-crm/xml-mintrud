@@ -110,8 +110,8 @@ final class XMLRecord
         $testDate = new ExamDate($dateStr);
 
         return new self(
-            new LastName($student->name2), // Фамилия
-            new FirstName($student->name1), // Имя
+            new LastName($student->name1), // Фамилия
+            new FirstName($student->name2), // Имя
             new MiddleName($student->name3), // Отчество
             new Snils($student->snilsNumber), // СНИЛС
             null, // IsForeignSnils - по умолчанию null
@@ -127,7 +127,7 @@ final class XMLRecord
             new LearnProgramTitle($program->name), // Название программы обучения
             new Bit($studentInGroup->examenated), // Признак успешной сдачи экзамена
             new LearnProgramId($program->mintrudId), // ID программы обучения по схеме
-            new OuterId($student->id), // Внешний идентификатор записи
+            new OuterId($studentInGroupProgEx->id), // Внешний идентификатор записи
         );
     }
 
@@ -193,8 +193,8 @@ final class XMLRecord
         // Добавляем Inn
         $organizationElement->appendChild($document->createElement('Inn', (string) $this->organizationInn));
 
-        // Добавляем EmployerTitle
-        $organizationElement->appendChild($document->createElement('EmployerTitle', (string) $this->organizationTitle));
+        // Добавляем Title
+        $organizationElement->appendChild($document->createElement('Title', (string) $this->organizationTitle));
 
         // Добавляем Organization в RegistryRecord
         $recordElement->appendChild($organizationElement);
