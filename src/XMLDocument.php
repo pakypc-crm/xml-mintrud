@@ -11,7 +11,6 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
-use InvalidArgumentException;
 use Pakypc\XMLMintrud\Exception\DocumentError;
 use Pakypc\XMLMintrud\XMLDocument\CommonData;
 use Pakypc\XMLMintrud\XMLDocument\XMLRecord;
@@ -83,7 +82,7 @@ final class XMLDocument implements \Stringable
     ): self {
         # Итерируем номера программ для МинТруда
         $numbers = \explode(',', (string) $program->mintrudId);
-        \count($numbers) === 1 and empty($numbers[0]) and throw new InvalidArgumentException('Номер учебной программы не указан.');
+        \count($numbers) === 1 and empty($numbers[0]) and throw new \InvalidArgumentException('Номер учебной программы не указан.');
 
         foreach ($numbers as $number) {
             try {
