@@ -11,6 +11,7 @@ use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
+use InvalidArgumentException;
 use Pakypc\XMLMintrud\Exception\DocumentError;
 use Pakypc\XMLMintrud\XMLDocument\CommonData;
 use Pakypc\XMLMintrud\XMLDocument\XMLRecord;
@@ -80,29 +81,37 @@ final class XMLDocument implements \Stringable
         EduProgram $program,
         Organization $organization,
     ): self {
-        try {
-            $this->records[] = XMLRecord::create(
-                $student,
-                $studentInGroup,
-                $studentInGroupProgEx,
-                $position,
-                $group,
-                $program,
-                $organization,
-                $this->commonData,
-            );
-        } catch (\Throwable $exception) {
-            $this->exceptions[] = new DocumentError(
-                $exception,
-                $student,
-                $studentInGroup,
-                $studentInGroupProgEx,
-                $position,
-                $group,
-                $program,
-                $organization,
-            );
+        # Итерируем номера программ для МинТруда
+        $numbers = \explode(',', (string) $program->mintrudId);
+        \count($numbers) === 1 and empty($numbers[0]) and throw new InvalidArgumentException('Номер учебной программы не указан.');
+
+        foreach ($numbers as $number) {
+            try {
+                $this->records[] = XMLRecord::create(
+                    $student,
+                    $studentInGroup,
+                    $studentInGroupProgEx,
+                    $position,
+                    $group,
+                    $program,
+                    $organization,
+                    $this->commonData,
+                    $number,
+                );
+            } catch (\Throwable $exception) {
+                $this->exceptions[] = new DocumentError(
+                    $exception,
+                    $student,
+                    $studentInGroup,
+                    $studentInGroupProgEx,
+                    $position,
+                    $group,
+                    $program,
+                    $organization,
+                );
+            }
         }
+
         return $this;
     }
 

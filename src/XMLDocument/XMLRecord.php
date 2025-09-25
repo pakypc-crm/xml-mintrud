@@ -33,8 +33,9 @@ use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationTitle;
  *
  * Содержит все необходимые данные для формирования одной записи в XML-документе
  * в соответствии с XSD-схемой.
+ *
+ * @internal
  */
-
 final class XMLRecord
 {
     /**
@@ -99,6 +100,7 @@ final class XMLRecord
         EduProgram $program,
         Organization $organization,
         CommonData $commonData,
+        int|string $learnProgramId,
     ): self {
         // если есть флаг "своя дата экзамена", то берём свою дату экзамена
         $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;
@@ -126,7 +128,7 @@ final class XMLRecord
             new ProtocolNumber($studentInGroupProgEx->sPr_protoNumber), // Номер протокола
             new LearnProgramTitle($program->name), // Название программы обучения
             new Bit($studentInGroup->examenated), // Признак успешной сдачи экзамена
-            new LearnProgramId($program->mintrudId), // ID программы обучения по схеме
+            new LearnProgramId($learnProgramId), // ID программы обучения по схеме
             new OuterId($studentInGroupProgEx->id), // Внешний идентификатор записи
         );
     }

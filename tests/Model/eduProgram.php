@@ -54,7 +54,7 @@ class eduProgram extends baseRecord
     public int $progEduType;
 
     /**
-     * ID программы для МинТруда
+     * ID программ для МинТруда через запятую
      */
-    public int $mintrudId;
+    public string $mintrudId;
 }
