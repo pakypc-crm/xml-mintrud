@@ -80,12 +80,14 @@ final class XMLDocument implements \Stringable
         EduProgram $program,
         Organization $organization,
     ): self {
-        # Итерируем номера программ для МинТруда
-        $numbers = \explode(',', (string) $program->mintrudId);
-        \count($numbers) === 1 and empty($numbers[0]) and throw new \InvalidArgumentException('Номер учебной программы не указан.');
+        try {
+            # Итерируем номера программ для МинТруда
+            $numbers = \explode(',', (string) $program->mintrudId);
+            \count($numbers) === 1 and empty($numbers[0]) and throw new \InvalidArgumentException(
+                'Номер учебной программы не указан.',
+            );
 
-        foreach ($numbers as $number) {
-            try {
+            foreach ($numbers as $number) {
                 $this->records[] = XMLRecord::create(
                     $student,
                     $studentInGroup,
@@ -97,18 +99,18 @@ final class XMLDocument implements \Stringable
                     $this->commonData,
                     $number,
                 );
-            } catch (\Throwable $exception) {
-                $this->exceptions[] = new DocumentError(
-                    $exception,
-                    $student,
-                    $studentInGroup,
-                    $studentInGroupProgEx,
-                    $position,
-                    $group,
-                    $program,
-                    $organization,
-                );
             }
+        } catch (\Throwable $exception) {
+            $this->exceptions[] = new DocumentError(
+                $exception,
+                $student,
+                $studentInGroup,
+                $studentInGroupProgEx,
+                $position,
+                $group,
+                $program,
+                $organization,
+            );
         }
 
         return $this;
