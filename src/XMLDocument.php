@@ -40,6 +40,7 @@ final class XMLDocument implements \Stringable
 
     /** @var list<DocumentError> Список ошибок документа */
     private array $exceptions = [];
+
     private array $programsTitle = [
         1 => 'Оказание первой помощи пострадавшим',
     ];
@@ -51,11 +52,6 @@ final class XMLDocument implements \Stringable
         private readonly CommonData $commonData,
     ) {}
 
-    public function defineLearnPrograms(array $programs): void
-    {
-        $this->programsTitle = $programs;
-    }
-
     /**
      * Создает новый экземпляр XMLDocument
      *
@@ -65,6 +61,11 @@ final class XMLDocument implements \Stringable
     public static function create(CommonData $commonData): self
     {
         return new self($commonData);
+    }
+
+    public function defineLearnPrograms(array $programs): void
+    {
+        $this->programsTitle = $programs;
     }
 
     /**
