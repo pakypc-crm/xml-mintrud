@@ -40,6 +40,9 @@ final class XMLDocument implements \Stringable
 
     /** @var list<DocumentError> Список ошибок документа */
     private array $exceptions = [];
+    private array $programsTitle = [
+        1 => 'Оказание первой помощи пострадавшим',
+    ];
 
     /**
      * @param CommonData $commonData Общие данные для XML-документа
@@ -47,6 +50,11 @@ final class XMLDocument implements \Stringable
     private function __construct(
         private readonly CommonData $commonData,
     ) {}
+
+    public function defineLearnPrograms(array $programs): void
+    {
+        $this->programsTitle = $programs;
+    }
 
     /**
      * Создает новый экземпляр XMLDocument
@@ -87,17 +95,21 @@ final class XMLDocument implements \Stringable
                 'Номер учебной программы не указан.',
             );
 
+
             foreach ($numbers as $number) {
+                $learnProgramTitle = $this->programsTitle[$number];
+
                 $this->records[] = XMLRecord::create(
                     $student,
                     $studentInGroup,
                     $studentInGroupProgEx,
                     $position,
                     $group,
-                    $program,
+                    $program, // todo удалить
                     $organization,
                     $this->commonData,
                     $number,
+                    $learnProgramTitle,
                 );
             }
         } catch (\Throwable $exception) {
