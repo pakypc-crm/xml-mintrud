@@ -97,10 +97,10 @@ final class XMLRecord
         studentInGroupProgEx $studentInGroupProgEx,
         CustomStudProf $position,
         EduGroup $group,
-        EduProgram $program,
         Organization $organization,
         CommonData $commonData,
         int|string $learnProgramId,
+        string $learnProgramTitle,
     ): self {
         // если есть флаг "своя дата экзамена", то берём свою дату экзамена
         $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;
@@ -126,7 +126,7 @@ final class XMLRecord
             new OrganizationTitle($commonData->organizationTitle), // Название организации обучения
             $testDate, // Дата экзамена
             new ProtocolNumber($studentInGroupProgEx->sPr_protoNumber), // Номер протокола
-            new LearnProgramTitle($program->name), // Название программы обучения
+            new LearnProgramTitle($learnProgramTitle), // Название программы обучения
             new Bit($studentInGroup->examenated), // Признак успешной сдачи экзамена
             new LearnProgramId($learnProgramId), // ID программы обучения по схеме
             new OuterId($studentInGroupProgEx->id), // Внешний идентификатор записи
