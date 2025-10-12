@@ -7,7 +7,6 @@ namespace Pakypc\XMLMintrud\XMLDocument;
 use crm\models\CustomStudent;
 use crm\models\CustomStudProf;
 use crm\models\EduGroup;
-use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
@@ -86,7 +85,6 @@ final class XMLRecord
      * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
      * @param \crm\models\customStudProf $position Данные о должности студента
      * @param \crm\models\eduGroup $group Данные о группе обучения
-     * @param eduProgram $program Данные о программе обучения
      * @param \crm\models\organization $organization Данные об организации
      * @param CommonData $commonData Общие данные
      * @return self Экземпляр XMLRecord
