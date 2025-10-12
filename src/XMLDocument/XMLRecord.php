@@ -7,7 +7,6 @@ namespace Pakypc\XMLMintrud\XMLDocument;
 use crm\models\CustomStudent;
 use crm\models\CustomStudProf;
 use crm\models\EduGroup;
-use crm\models\EduProgram;
 use crm\models\Organization;
 use crm\models\StudentInGroup;
 use crm\models\studentInGroupProgEx;
@@ -86,7 +85,6 @@ final class XMLRecord
      * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
      * @param \crm\models\customStudProf $position Данные о должности студента
      * @param \crm\models\eduGroup $group Данные о группе обучения
-     * @param eduProgram $program Данные о программе обучения
      * @param \crm\models\organization $organization Данные об организации
      * @param CommonData $commonData Общие данные
      * @return self Экземпляр XMLRecord
@@ -97,10 +95,10 @@ final class XMLRecord
         studentInGroupProgEx $studentInGroupProgEx,
         CustomStudProf $position,
         EduGroup $group,
-        EduProgram $program,
         Organization $organization,
         CommonData $commonData,
         int|string $learnProgramId,
+        string $learnProgramTitle,
     ): self {
         // если есть флаг "своя дата экзамена", то берём свою дату экзамена
         $dateStr = $studentInGroupProgEx->sPr_examenCustom ? $studentInGroupProgEx->sPr_examenDate : null;
@@ -126,7 +124,7 @@ final class XMLRecord
             new OrganizationTitle($commonData->organizationTitle), // Название организации обучения
             $testDate, // Дата экзамена
             new ProtocolNumber($studentInGroupProgEx->sPr_protoNumber), // Номер протокола
-            new LearnProgramTitle($program->name), // Название программы обучения
+            new LearnProgramTitle($learnProgramTitle), // Название программы обучения
             new Bit($studentInGroup->examenated), // Признак успешной сдачи экзамена
             new LearnProgramId($learnProgramId), // ID программы обучения по схеме
             new OuterId($studentInGroupProgEx->id), // Внешний идентификатор записи
