@@ -16,13 +16,13 @@ final class DocumentError extends \Exception
 {
     public function __construct(
         \Throwable $previous,
-        public readonly CustomStudent $student,
-        public readonly StudentInGroup $studentInGroup,
+        public readonly customStudent $student,
+        public readonly studentInGroup $studentInGroup,
         public readonly studentInGroupProgEx $studentInGroupProgEx,
-        public readonly CustomStudProf $position,
-        public readonly EduGroup $group,
-        public readonly EduProgram $program,
-        public readonly Organization $organization,
+        public readonly customStudProf $position,
+        public readonly eduGroup $group,
+        public readonly eduProgram $program,
+        public readonly organization $organization,
     ) {
         parent::__construct(previous: $previous);
     }

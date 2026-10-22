@@ -111,12 +111,12 @@ final class XMLDocument implements \Stringable
     /**
      * Добавляет информацию об одном учащемся
      *
-     * @param \crm\models\CustomStudent $student Данные студента
+     * @param CustomStudent $student Данные студента
      * @param StudentInGroup $studentInGroup Данные студента в группе
      * @param studentInGroupProgEx $studentInGroupProgEx Дополнительные данные о программе обучения
      * @param CustomStudProf $position Данные о должности студента
      * @param EduGroup $group Данные о группе обучения
-     * @param \crm\models\EduProgram $program Данные о программе обучения
+     * @param EduProgram $program Данные о программе обучения
      * @param Organization $organization Данные об организации
      * @return self Текущий экземпляр XMLDocument для цепочки вызовов
      */

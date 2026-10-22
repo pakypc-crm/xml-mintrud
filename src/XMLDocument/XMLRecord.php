@@ -13,19 +13,19 @@ use crm\models\studentInGroupProgEx;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Bit;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Citizenship;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerInn;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationInn;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramId;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerTitle;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\ExamDate;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\FirstName;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\MiddleName;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\LastName;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramId;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramTitle;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\MiddleName;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationInn;
+use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationTitle;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\OuterId;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Position;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\ProtocolNumber;
 use Pakypc\XMLMintrud\XMLDocument\ValueObject\Snils;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\EmployerTitle;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\ExamDate;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\LearnProgramTitle;
-use Pakypc\XMLMintrud\XMLDocument\ValueObject\OrganizationTitle;
 
 /**
  * DTO для хранения данных о записи учащегося
@@ -81,11 +81,11 @@ final class XMLRecord
     /**
      * Создает экземпляр XMLRecord на основе данных из CRM
      *
-     * @param customStudent $student Данные студента
-     * @param \crm\models\studentInGroup $studentInGroup Данные студента в группе
-     * @param \crm\models\customStudProf $position Данные о должности студента
-     * @param \crm\models\eduGroup $group Данные о группе обучения
-     * @param \crm\models\organization $organization Данные об организации
+     * @param CustomStudent $student Данные студента
+     * @param StudentInGroup $studentInGroup Данные студента в группе
+     * @param CustomStudProf $position Данные о должности студента
+     * @param EduGroup $group Данные о группе обучения
+     * @param Organization $organization Данные об организации
      * @param CommonData $commonData Общие данные
      * @return self Экземпляр XMLRecord
      */
